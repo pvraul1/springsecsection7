@@ -1,6 +1,8 @@
 package com.rperezv365.config;
 
 import javax.sql.DataSource;
+
+import com.rperezv365.exceptionhandling.CustomBasicAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -38,7 +40,7 @@ public class ProjectSecurityConfig {
                         .requestMatchers("/notices", "/contact", "/error", "/register").permitAll());
         http.formLogin(Customizer.withDefaults());
         //http.formLogin(flc -> flc.disable());
-        http.httpBasic(Customizer.withDefaults());
+        http.httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
         //http.httpBasic((flb -> flb.disable()));
 
         return http.build();
