@@ -1,5 +1,6 @@
 package com.rperezv365.config;
 
+import com.rperezv365.exceptionhandling.CustomAccessDeniedHandler;
 import com.rperezv365.exceptionhandling.CustomBasicAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +38,7 @@ public class ProjectSecurityProdConfig {
         http.formLogin(Customizer.withDefaults());
         //http.formLogin(flc -> flc.disable());
         http.httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
+        http.exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
         //http.httpBasic((flb -> flb.disable()));
 
         return http.build();

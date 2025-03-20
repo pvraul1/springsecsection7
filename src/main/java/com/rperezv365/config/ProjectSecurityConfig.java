@@ -1,5 +1,6 @@
 package com.rperezv365.config;
 
+import com.rperezv365.exceptionhandling.CustomAccessDeniedHandler;
 import javax.sql.DataSource;
 
 import com.rperezv365.exceptionhandling.CustomBasicAuthenticationEntryPoint;
@@ -41,6 +42,7 @@ public class ProjectSecurityConfig {
         http.formLogin(Customizer.withDefaults());
         //http.formLogin(flc -> flc.disable());
         http.httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
+        http.exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
         //http.httpBasic((flb -> flb.disable()));
 
         return http.build();
